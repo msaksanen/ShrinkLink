@@ -9,6 +9,9 @@ namespace ShrinkLinkCore.DataTransferObjects
     public class Result
     {
         public string? Text { get; set; }
-        public int IntResult { get; set; } = 0;
+        public int Length { get; set; } = 0;
+        public int CountResult { get; set; } = 0;
+        public int? SaveResult { get; set; } = 0;
+        public bool BoolResult { get; set; } = true;
     }
 }

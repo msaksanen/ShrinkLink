@@ -1,8 +1,13 @@
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using ShrinkLinkApp.Helpers;
+using ShrinkLinkBusiness.ServicesImplementations;
+using ShrinkLinkCore.Abstractions;
+using ShrinkLinkCQS.Links.Queries;
 using ShrinkLinkDb;
 
 namespace ShrinkLinkApp
@@ -55,6 +60,11 @@ namespace ShrinkLinkApp
                 optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(GetLinkByHashQuery).Assembly));
+
+
+
+            builder.Services.AddScoped<ILinkService, LinkService>();
 
             builder.Services.AddScoped<URLChecker>();
             builder.Services.AddScoped<MD5>();

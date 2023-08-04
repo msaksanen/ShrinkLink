@@ -4,18 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkApp", "ShrinkLinkApp\ShrinkLinkApp.csproj", "{1811D3D9-D831-4778-8DA4-899B4A6663A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33E3A3B1-E92A-47A5-A296-F4CE532E74AF} = {33E3A3B1-E92A-47A5-A296-F4CE532E74AF}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkDb", "ShrinkLinkDb\ShrinkLinkDb.csproj", "{A3CCAE1F-0A1C-496B-A057-82C04DD66DC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkCore", "ShrinkLinkCore\ShrinkLinkCore.csproj", "{B843CB89-0D90-4C99-80FB-1178579A725E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrinkLinkBusiness", "ShrinkLinkBusiness\ShrinkLinkBusiness.csproj", "{7F7DFD71-9B03-41B6-9685-E99DBFA9E42E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkBusiness", "ShrinkLinkBusiness\ShrinkLinkBusiness.csproj", "{7F7DFD71-9B03-41B6-9685-E99DBFA9E42E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A3CCAE1F-0A1C-496B-A057-82C04DD66DC2} = {A3CCAE1F-0A1C-496B-A057-82C04DD66DC2}
 		{B843CB89-0D90-4C99-80FB-1178579A725E} = {B843CB89-0D90-4C99-80FB-1178579A725E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrinkLinkCQS", "ShrinkLinkCQS\ShrinkLinkCQS.csproj", "{33E3A3B1-E92A-47A5-A296-F4CE532E74AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkCQS", "ShrinkLinkCQS\ShrinkLinkCQS.csproj", "{33E3A3B1-E92A-47A5-A296-F4CE532E74AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A3CCAE1F-0A1C-496B-A057-82C04DD66DC2} = {A3CCAE1F-0A1C-496B-A057-82C04DD66DC2}
 		{B843CB89-0D90-4C99-80FB-1178579A725E} = {B843CB89-0D90-4C99-80FB-1178579A725E}
