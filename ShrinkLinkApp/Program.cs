@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using ShrinkLinkApp.Helpers;
 using ShrinkLinkDb;
 
 namespace ShrinkLinkApp
@@ -54,6 +55,9 @@ namespace ShrinkLinkApp
                 optionsBuilder => optionsBuilder.UseSqlServer(connectionString));
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddScoped<URLChecker>();
+            builder.Services.AddScoped<MD5>();
 
             var app = builder.Build();
 
