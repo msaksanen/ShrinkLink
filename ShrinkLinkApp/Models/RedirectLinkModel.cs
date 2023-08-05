@@ -1,9 +1,9 @@
-﻿namespace ShrinkLinkApp.Models
+﻿using ShrinkLinkCore.DataTransferObjects;
+
+namespace ShrinkLinkApp.Models
 {
-    public class ShortenModel
+    public class RedirectLinkModel
     {
-        public Guid Id { get; set; }
-        public string? OriginalLink { get; set; }
         public string? ShortLink { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string? LocalURL { get; set; }

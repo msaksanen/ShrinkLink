@@ -17,6 +17,11 @@ namespace ShrinkLinkApp.MappingProfiles
 
             CreateMap<LinkDto, LinkModel>().ReverseMap();
 
+            CreateMap<LinkDto, RedirectLinkModel>()
+                .ForMember(i => i.ShortLink, d => d.MapFrom(dt => dt.ShortId))
+                .ForMember(i => i.ExpirationDate, d => d.MapFrom(dt => dt.ExpirationDate));
+
+
         }
 
     }

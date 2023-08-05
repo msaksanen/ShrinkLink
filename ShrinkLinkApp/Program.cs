@@ -88,8 +88,14 @@ namespace ShrinkLinkApp
             app.UseAuthorization();
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+              name: "shrink",
+              pattern: "{shortid}",
+              defaults: new { controller = "Link", action = "RedirectLink"});
+
+            app.MapControllerRoute(
+               name: "default",
+               pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
             app.Run();
         }

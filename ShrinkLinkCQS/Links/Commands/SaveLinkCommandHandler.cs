@@ -23,7 +23,7 @@ namespace ShrinkLinkCQS.Links.Commands
         public async Task<int?> Handle(SaveLinkCommand request,
                      CancellationToken cts)
         {
-            if (_context.Links != null && _context.Links.Any() && request.Dto != null)
+            if (_context.Links != null && request.Dto != null)
             {
                 var entity = _mapper.Map<Link>(request.Dto);
                 await _context.AddAsync(entity, cts);

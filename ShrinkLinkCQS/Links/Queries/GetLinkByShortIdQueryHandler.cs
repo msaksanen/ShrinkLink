@@ -30,6 +30,7 @@ namespace ShrinkLinkCQS.Links.Queries
                 if (entity == null) return null;
 
                 var dto = _mapper.Map<LinkDto>(entity);
+                return dto;
             }
             return null;
         }

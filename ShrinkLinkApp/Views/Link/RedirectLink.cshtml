@@ -1,7 +1,8 @@
-﻿@model ShrinkLinkApp.Models.ShortenModel
+﻿@model ShrinkLinkApp.Models.RedirectLinkModel
+
 
 @{
-    ViewData["Title"] = "Shortened URL";
+    ViewData["Title"] = "Redirection";
 }
 
 <div class="jumbotron">
@@ -9,14 +10,7 @@
 <p class="lead">Our system offers a wide range of possibilities for creating shortened weblinks </p>
 <hr class="my-4">
     <dl class="row">
-      @if (Model.SystemFlag != -1)
-        {
-            <dt class="col-sm-10">
-                <label asp-for="OriginalLink" class="control-label">Your original long URL</label>
-            </dt>
-            <dd class="col-sm-10">
-                <input name="OriginalLink" type="text" size="45" value="@Model.OriginalLink" readonly />
-            </dd>
+    
             <dt class="col-sm-5">
                 <label asp-for="ShortLink" class="control-label">Your shortened URL</label>
             </dt>
@@ -24,41 +18,29 @@
                 <input name="ShortlLink" type="text" size="45" id="clipboard" value="@Model.LocalURL@Model.ShortLink" readonly />
                 <button type="button" class="btn btn-light" onclick="clipcopy()"><i class="bi bi-clipboard-check"></i> Copy ShortURL</button>
             </dd>
-            @if (Model.SystemFlag == 100)
-            {
+        @if (Model.SystemFlag == 1)
+        {
                 <dt class="col-sm-10">
-                    <label class="control-label">Short link expiration date successfully updated </label>
+                    <label class="control-label">Short link expired</label>
                 </dt>
-            }
-            @if (Model.SystemFlag == -2)
-            {
-                <dt class="col-sm-10">
-                    <label class="control-label">The link was successfully found in the database</label>
-                </dt>
-            }
+        }
+        @if (Model.SystemFlag != -1)
+        {
             <dt class="col-sm-10">
                 <label asp-for="ExpirationDate" class="control-label">ShortURL Expiration Date Time</label>
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.ExpirationDate)
             </dd>
-            @if (Model.SystemFlag >0 && Model.SystemFlag<100)
-            {
-                <dt class="col-sm-10">
-                    <label class="control-label">Shortened link was successfully saved</label>
-                </dt>
-            }
         }
         @if (Model.SystemFlag == -1)
         {
             <dt class="col-sm-10">
-                <label asp-for="SystemInfo" class="control-label">Input correct data, please</label>
-            </dt>
-            <dd class="col-sm-10">
+                <label asp-for="SystemInfo" class="control-label">Long URL was not found</label>
                 @Html.DisplayFor(model => model.SystemInfo)
-            </dd>           
+            </dt>
         }
-        @if (Model.SystemFlag == 0 || Model.SystemFlag == 1000)
+        @if (Model.SystemFlag == 10)
         {
             <dt class="col-sm-10">
                 <label asp-for="SystemInfo" class="control-label">Some errors occurred. Please, try again later )))</label>
@@ -67,7 +49,7 @@
                 @Html.DisplayFor(model => model.SystemInfo)
             </dd>
         }
-        
+
     </dl>
 <br />
     <a href="~/Home/Index" class="btn btn-primary" role="button"><i class="bi bi-house"></i> Shorten another URL</a>

@@ -44,9 +44,8 @@ namespace ShrinkLinkBusiness.ServicesImplementations
                    //var res = await _mediator.Send(new ChangeLinkExpTimeCommand() { ExpTime = newTime, Id = oldLink.Id });
 
                     oldLink.ExpirationDate = dto.ExpirationDate;
-                    //var res = await _mediator.Send(new UpdateLinkCommand() { dto = oldLink });
-                    var res = await _mediator.Send(new PatchLinkCommand() 
-                    { Id = oldLink.Id, nameValuePropertiesPairs = new Dictionary<string, object?>() { ["ExpirationDate"] = dto.ExpirationDate} });
+                    var res = await _mediator.Send(new PatchLinkCommand()
+                    { Id = oldLink.Id, nameValuePropertiesPairs = new Dictionary<string, object?>() { ["ExpirationDate"] = dto.ExpirationDate } });
                     if (res > 0)
                     {
                         //oldLink.ExpirationDate = newTime;
@@ -60,11 +59,14 @@ namespace ShrinkLinkBusiness.ServicesImplementations
                     return linkObj;
                 }
                 linkObj.Link = oldLink;
+                linkObj.GenResult = new Result() { SaveResult = -2 };
                 return linkObj;
             }
 
             return await GenerateLinkObjAsync(dto);
         }
+
+        
 
         private async Task<LinkGenObjExtend> GenerateLinkObjAsync(LinkDto dto)
         {
