@@ -39,9 +39,14 @@
       <form asp-controller="Link" asp-action="Shorten" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="URL" class="control-label"><b>Input your long URL</b></label>
-            <input asp-for="URL" class="form-control" />
+            <label asp-for="URL" class="control-label"><b>Your long URL</b></label>
+                    <input asp-for="URL" class="form-control" onfocus="expdate()" />
             <span asp-validation-for="URL" class="text-danger"></span>
+        </div>
+         <div class="form-group" id="expdate" hidden>
+            <label asp-for="ExpDateTime" class="control-label"><b>Short URL expiration Time</b></label>
+            <input asp-for="ExpDateTime" class="form-control" />
+            <span asp-validation-for="ExpDateTime" class="text-danger"></span>
         </div>
         <br />
         <div class="form-group">
@@ -52,6 +57,16 @@
     </div>
 
 </div>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/expdatashow.js"></script>
+}
+
+
 
 
      

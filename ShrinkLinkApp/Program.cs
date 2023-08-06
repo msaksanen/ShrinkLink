@@ -68,6 +68,7 @@ namespace ShrinkLinkApp
 
             builder.Services.AddScoped<EmailChecker>();
             builder.Services.AddScoped<BirthDateChecker>();
+            builder.Services.AddScoped<ExpDateChecker>();
             builder.Services.AddScoped<URLChecker>();
             builder.Services.AddScoped<MD5>();
 

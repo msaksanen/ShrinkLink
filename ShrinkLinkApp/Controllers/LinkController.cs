@@ -64,17 +64,19 @@ namespace ShrinkLinkApp.Controllers
                     
                 };
 
-                if (model.ExpDateTime != default(DateTime) && model.ExpDateTime != null && model.ExpDateTime > DateTime.Now)
+                int defExpTimeMin = 24 * 60 * 365;
+                var optsExp = _configuration["ShrinkLink:ExpiryTimeMin"];
+                if (int.TryParse(optsExp, out var exp) && exp > 0)
+                    defExpTimeMin = exp;
+
+                if (model.ExpDateTime != default(DateTime) && model.ExpDateTime != null 
+                    && model.ExpDateTime >= DateTime.Now.AddMinutes(1) && model.ExpDateTime <= DateTime.Now.AddYears(1))
                 {
                     link.ExpirationDate = model.ExpDateTime!.Value;
                 }
                 else
                 {
-                    var optsExp = _configuration["ShrinkLink:ExpiryTimeMin"];
-                    if (int.TryParse(optsExp, out var exp) && exp > 0)
-                        link.ExpirationDate = link.ExpirationDate.AddMinutes(exp);
-                    else
-                        link.ExpirationDate = DateTime.Now.AddDays(1);
+                    link.ExpirationDate = DateTime.Now.AddMinutes(defExpTimeMin);
                 }
 
                 var newLinkObj = await _linkService.GenerateShorLinkAsync(link);

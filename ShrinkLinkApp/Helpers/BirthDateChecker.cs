@@ -2,7 +2,7 @@
 {
     public class BirthDateChecker
     {
-        public int Check(DateTime? birthDate, HttpContext context)
+        public int Check(DateTime? birthDate)
         {
 
             if (birthDate == null)
