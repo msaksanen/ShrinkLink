@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ShrinkLinkDb\ShrinkLinkDb.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Roles\Commands\" />
+  </ItemGroup>
+
 </Project>

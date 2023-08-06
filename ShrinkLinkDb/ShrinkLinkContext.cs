@@ -13,6 +13,7 @@ namespace ShrinkLinkDb
     {
         public DbSet<User>? Users { get; set; }
         public DbSet<Link>? Links { get; set; }
+        public DbSet<Role>? Roles { get; set; }
 
         public ShrinkLinkContext(DbContextOptions<ShrinkLinkContext> options)
        : base(options)
