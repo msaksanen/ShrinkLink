@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using MediatR;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using ShrinkLinkApp.Helpers;
 using ShrinkLinkApp.Models;
 using ShrinkLinkCore.Abstractions;
 using ShrinkLinkCore.DataTransferObjects;
+using ShrinkLinkCQS.Links.Commands;
 using ShrinkLinkCQS.Links.Queries;
 using System.Diagnostics.Metrics;
 
@@ -79,7 +81,13 @@ namespace ShrinkLinkApp.Controllers
                     link.ExpirationDate = DateTime.Now.AddMinutes(defExpTimeMin);
                 }
 
-                var newLinkObj = await _linkService.GenerateShorLinkAsync(link);
+                var sUserId = string.Empty;
+                if (User.Identities.Any(identity => identity.IsAuthenticated))
+                {
+                    sUserId = User.FindFirst("UId")?.Value;
+                }
+
+                var newLinkObj = await _linkService.GenerateShorLinkAsync(link, sUserId);
 
                 if (newLinkObj != null && newLinkObj?.GenResult!=null && newLinkObj?.GenResult?.CountResult!=0) 
                 {
@@ -110,7 +118,11 @@ namespace ShrinkLinkApp.Controllers
            {
                 var link = await _mediator.Send(new GetLinkByShortIdQuery() { ShortId = shortid });
                 if (link!=null && !string.IsNullOrEmpty(link.URL) && link.ExpirationDate> DateTime.Now)
+                {
+                    var res = await _mediator.Send(new PatchLinkCommand()
+                    { Id = link.Id, nameValuePropertiesPairs = new Dictionary<string, object?>() { ["Counter"] = link.Counter+1 }});
                     return Redirect(link.URL);
+                }
 
                 var location = new Uri($"{Request.Scheme}://{Request.Host}");
                 var url = location.AbsoluteUri;

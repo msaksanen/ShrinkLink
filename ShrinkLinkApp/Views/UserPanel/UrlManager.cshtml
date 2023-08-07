@@ -1,0 +1,118 @@
+﻿@using ShrinkLinkApp.Helpers;
+@using ShrinkLinkCore.TableObjects;
+@addTagHelper *, ShrinkLinkApp
+
+@model UrlManagerModel
+
+@{
+    ViewData["Title"] = "URL Manager";
+}
+
+
+<Table class="delivery">
+    <tbody>
+        <tr>
+            <form method="get">
+            <td style="border:none">
+                <label>URL: </label>
+                <input name="url" value="@Model.FilterModel.SelectedURL" />
+            </td>
+            <td style="border:none">
+                <label>Short URL: </label>
+                <input name="shortid" value="@Model.FilterModel.SelectedShortId" />
+            </td>
+            <td style="border:none">
+                <label>Expiry Date: </label>
+                <input name="expdate" type="date" value="@Model.FilterModel.SelectedExpDate" />
+                <input type="submit" value="Filter" />
+            </td>
+            </form>
+        </tr>
+    </tbody>
+</Table>
+
+<Table class="delivery">
+    <caption>URL Info Table</caption>
+    <thead>
+        <tr>
+            <th>
+                <sort-header action="UrlManager" up="@Model.SortModel.Up"
+                             opt-url-selurl="@(Model.FilterModel.SelectedURL)"
+                             opt-url-shortid="@(Model.FilterModel.SelectedShortId)"
+                             opt-url-expdate="@(Model.FilterModel.SelectedExpDate)"
+                             current="@Model.SortModel.Current" property="@Model.SortModel.URLSort">URL</sort-header>
+
+            </th>
+            <th>
+                <sort-header action="UrlManager" up="@Model.SortModel.Up"
+                             opt-url-selurl="@(Model.FilterModel.SelectedURL)"
+                             opt-url-shortid="@(Model.FilterModel.SelectedShortId)"
+                             opt-url-expdate="@(Model.FilterModel.SelectedExpDate)"
+                             current="@Model.SortModel.Current" property="@Model.SortModel.ShortURLSort">Short URL</sort-header>
+
+            </th>
+             <th>
+                <sort-header action="UrlManager" up="@Model.SortModel.Up"
+                             opt-url-selurl="@(Model.FilterModel.SelectedURL)"
+                             opt-url-shortid="@(Model.FilterModel.SelectedShortId)"
+                             opt-url-expdate="@(Model.FilterModel.SelectedExpDate)"
+                             current="@Model.SortModel.Current" property="@Model.SortModel.CountSort">Link Redirect Count</sort-header>
+
+            </th>
+            <th>
+                <sort-header action="UrlManager" up="@Model.SortModel.Up"
+                             opt-url-selurl="@(Model.FilterModel.SelectedURL)"
+                             opt-url-shortid="@(Model.FilterModel.SelectedShortId)"
+                             opt-url-expdate="@(Model.FilterModel.SelectedExpDate)"
+                             current="@Model.SortModel.Current" property="@Model.SortModel.CreationDateSort">Creation Date</sort-header>
+
+            </th>
+            <th>
+                <sort-header action="UrlManager" up="@Model.SortModel.Up"
+                             opt-url-selurl="@(Model.FilterModel.SelectedURL)"
+                             opt-url-shortid="@(Model.FilterModel.SelectedShortId)"
+                             opt-url-expdate="@(Model.FilterModel.SelectedExpDate)"
+                             current="@Model.SortModel.Current" property="@Model.SortModel.ExpirationDateSort">Expiration Date</sort-header>
+
+            </th>
+          
+            <th>
+                Details
+            </th>
+        </tr>
+    <thead>
+    <tbody>
+
+
+
+                @if (Model.Links.Any())
+                {
+                    foreach (var item in Model.Links)
+                    {
+                        await Html.RenderPartialAsync("LinksPartialView", item);
+                    }
+                }
+
+    </tbody>
+</Table>
+
+
+@section Footer
+    {
+
+    @Html.GeneratePaginator( @Model.PageModel.TotalPages,@Model.PageModel.PageNumber,
+                             @Model.PageModel.PageRoute, @Model.ProcessOptions)
+ }
+
+
+@section CssStyles
+{
+        <style>
+           caption {
+              caption-side: top;
+              text-align: center;
+              padding: 10px 0;
+              font-size: 14px;}        
+        </style>
+}
+

@@ -1,0 +1,102 @@
+﻿@model UserModel
+
+@{
+    ViewData["Title"] = "Account Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+ 
+    <h4>My account data </h4>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsFullBlocked)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsFullBlocked)
+        </dd>
+
+
+        @if (Model.RoleNames != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RoleNames)
+            </dt>
+            <dd class="col-sm-10">
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in Model.RoleNames)
+                    {
+                        <li class="list-group-item" style="width:fit-content">
+                         @item
+                        </li>
+
+                    }
+                </ul>
+            </dd>
+        }
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+       
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            Registration Date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+    </dl>
+</div>
+
+
+@section Footer
+    {
+    <div>
+        <a href="~/userpanel/accsettingsedit/@Model.Id"><h6>Edit details &#5125</h6></a>
+    </div>
+ 
+        <div>
+            <a href="~/home/index"><h6>&#5130 Back</h6></a>
+        </div>
+
+    
+}
+
+

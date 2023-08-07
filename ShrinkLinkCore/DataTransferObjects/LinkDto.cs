@@ -12,7 +12,7 @@ namespace ShrinkLinkCore.DataTransferObjects
         public string? URL { get; set; }
         public string? Hash { get; set; }
         public string? ShortId { get; set; }
-        public int? Counter { get; set; }
+        public int? Counter { get; set; } = 0;
         public DateTime CreationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public List<UserDto>? Users { get; set; }

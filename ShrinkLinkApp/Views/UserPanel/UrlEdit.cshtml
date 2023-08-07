@@ -1,0 +1,74 @@
+﻿@model UrlEditModel
+
+@{
+    ViewData["Title"] = "URL Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+    <h4>Edit your URL details</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="UserPanel" asp-action="UrlEdit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="LinkId" class="form-control" />
+                <input type="hidden" asp-for="UserId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="URL" class="control-label"></label>
+                <br/>
+                <input name="URL" type="text" size="45" value="@Model.URL" readonly />
+                <a href="~/userpanel/removeuserurl/?linkid=@Model.LinkId&id=@Model.UserId" class="btn btn-light"><i class="bi bi-file-earmark-x"></i> Remove URL</a>
+                <span asp-validation-for="URL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortId" class="control-label">Short URL</label>
+                <br />
+                <input name="ShortId" type="text" size="45" value="@Model.LocalURL@Model.ShortId" id="clipboard" readonly />
+                <button type="button" class="btn btn-light" onclick="clipcopy()"><i class="bi bi-clipboard-check"></i> Copy ShortURL</button>
+                <span asp-validation-for="ShortId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Counter" class="control-label"></label>
+                <br/>
+                <input asp-for="Counter"  size="5" readonly />
+                <span asp-validation-for="Counter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="CreationDate" class="control-label"></label>
+                 <br/>
+                  <input name="CreationDate" type="datetime" size="15" value="@Model.CreationDate" readonly />
+                  <span asp-validation-for="CreationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpDateTime" class="control-label"></label>
+                <input asp-for="ExpDateTime" class="form-control" />
+                <span asp-validation-for="ExpDateTime" class="text-danger"></span>
+            </div>
+            <br />
+            <input type="submit" value="Save changes" class="btn btn-primary" />
+            <br />
+        </form>
+    </div>
+</div>
+<br />
+@section Footer
+    {
+    <div>
+        <a href="~/userpanel/urlmanager/"><h6>&#5130 Back</h6></a>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/clipboard.js"></script>
+}

@@ -1,0 +1,24 @@
+﻿@model LinkDto
+
+<tr>
+    <td area-label="URL">
+       <input name="URL" type="text" size="45" value="@Model.URL" readonly />
+    </td>
+    <td area-label="Short URL">
+        <label name="ShortURL">@ViewData["LocalUrl"]@Model.ShortId</label>
+    </td>
+    <td area-label="Counter">
+        @Html.DisplayFor(modelItem => Model.Counter)
+    </td>
+    <td area-label="Creation Date">
+        @Html.DisplayFor(modelItem => Model.CreationDate)
+    </td>
+    <td area-label="Expiration Date">
+        @Html.DisplayFor(modelItem => Model.ExpirationDate)
+    </td>
+
+    <td>
+        <span> <a class="btn btn-link" href="~/userpanel/urledit/?shortid=@Model.ShortId">Edit</a></span>
+    </td>
+
+</tr>

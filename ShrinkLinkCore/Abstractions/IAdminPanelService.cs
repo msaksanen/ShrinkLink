@@ -1,4 +1,4 @@
-﻿using ShrinkLinkCore.DataTransferObjects;
+﻿using ShrinkLinkCore.TableObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ShrinkLinkCore.Abstractions
 {
-    public interface ILinkService
+    public interface IAdminPanelService
     {
-        Task<LinkGenObjExtend> GenerateShorLinkAsync(LinkDto dto, string? sUserId);
+        Task<UrlManagerModel?> GenerateURLManagerModel(UrlMgrInpObj inpObj, string userId);
     }
 }

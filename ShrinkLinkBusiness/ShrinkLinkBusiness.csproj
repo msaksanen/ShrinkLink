@@ -28,4 +28,8 @@
     <ProjectReference Include="..\ShrinkLinkCQS\ShrinkLinkCQS.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FilterSortPageHelpers\" />
+  </ItemGroup>
+
 </Project>

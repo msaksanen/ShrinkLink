@@ -65,8 +65,10 @@ namespace ShrinkLinkApp
 
 
             builder.Services.AddScoped<ILinkService, LinkService>();
+            builder.Services.AddScoped<IAdminPanelService, AdminPanelService>();
 
             builder.Services.AddScoped<EmailChecker>();
+            builder.Services.AddScoped<ModelUserBuilder>();
             builder.Services.AddScoped<BirthDateChecker>();
             builder.Services.AddScoped<ExpDateChecker>();
             builder.Services.AddScoped<URLChecker>();

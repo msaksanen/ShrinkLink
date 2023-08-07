@@ -12,6 +12,7 @@ using ShrinkLinkCQS.Links.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -31,44 +32,49 @@ namespace ShrinkLinkBusiness.ServicesImplementations
             _mediator = mediator;
         }
 
-        public async Task<LinkGenObjExtend> GenerateShorLinkAsync(LinkDto dto)
+        public async Task<LinkGenObjExtend> GenerateShorLinkAsync(LinkDto dto, string? sUserId)
         {
             LinkGenObjExtend linkObj = new();
+            Guid UId = Guid.Empty;
+            if (sUserId != null && Guid.TryParse(sUserId, out var id))
+                UId = id;
 
             var oldLink = await _mediator.Send(new GetLinkByHashQuery() { Hash = dto.Hash });
-            if (oldLink != null && string.Compare(dto.URL, oldLink.URL,StringComparison.InvariantCulture)==0)
+
+            if (oldLink != null && oldLink.URL!=null && oldLink.URL.Equals(dto.URL,StringComparison.InvariantCulture))
             {
+                if (UId != Guid.Empty)
+                    await _mediator.Send(new AddLinkIdToUserByIdCommand() { LinkId = oldLink.Id, UserId = UId });
+
                 if (oldLink.ExpirationDate < DateTime.Now)
                 {
-                   //var newTime = dto.ExpirationDate;
-                   //var res = await _mediator.Send(new ChangeLinkExpTimeCommand() { ExpTime = newTime, Id = oldLink.Id });
-
                     oldLink.ExpirationDate = dto.ExpirationDate;
                     var res = await _mediator.Send(new PatchLinkCommand()
                     { Id = oldLink.Id, nameValuePropertiesPairs = new Dictionary<string, object?>() { ["ExpirationDate"] = dto.ExpirationDate } });
                     if (res > 0)
                     {
-                        //oldLink.ExpirationDate = newTime;
                         linkObj.ExpDateUpdResult = res;
-                        linkObj.Link = oldLink;
+                        linkObj.Link = oldLink;                    
                     }
                     else
                     {
-                        linkObj = await GenerateLinkObjAsync(dto);
+                        linkObj = await GenerateLinkObjAsync(dto, UId);
                     }
                     return linkObj;
                 }
                 linkObj.Link = oldLink;
+               
                 linkObj.GenResult = new Result() { SaveResult = -2 };
                 return linkObj;
             }
 
-            return await GenerateLinkObjAsync(dto);
+           
+            return await GenerateLinkObjAsync(dto, UId);
         }
 
         
 
-        private async Task<LinkGenObjExtend> GenerateLinkObjAsync(LinkDto dto)
+        private async Task<LinkGenObjExtend> GenerateLinkObjAsync(LinkDto dto, Guid UId)
         {
             int lengthId = 8;
             string shortId = string.Empty;
@@ -105,6 +111,8 @@ namespace ShrinkLinkBusiness.ServicesImplementations
                 Link = dto,
                 GenResult = newRes
             };
+            if (UId != Guid.Empty && dto != null)
+                await _mediator.Send(new AddLinkIdToUserByIdCommand() { LinkId = dto.Id, UserId = UId });
 
             return newLink;
         }
