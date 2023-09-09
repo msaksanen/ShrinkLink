@@ -147,7 +147,7 @@ namespace ShrinkLinkApp.Controllers
                     return View(model);
                 }
 
-                model.SystemFlag = 100;
+                model.SystemFlag = 10;
                 return View(model);
             }
            catch (Exception e)
