@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  shrinksqlsrvcontainer :
+    container_name: SqlServerContainer
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1500:1433"
+    volumes: 
+      - sqlsrvvolume:/var/opt/mssql
+    environment:
+      MSSQL_SA_PASSWORD: "qwerty12345"
+      ACCEPT_EULA: Y
+
+  shrinklinkapp:
+    container_name: ShrinkLinkAppContainer
+    image: ${DOCKER_REGISTRY-}shrinklinkapp
+    ports:
+       - 8001:80 
+    build:
+      context: .
+      dockerfile: ShrinkLinkApp/Dockerfile
+    depends_on:
+      - shrinksqlsrvcontainer
+
+volumes:
+  sqlsrvvolume:
+
+networks:
+  shrinknet: 
+
+   
+ 
+
+  
+  

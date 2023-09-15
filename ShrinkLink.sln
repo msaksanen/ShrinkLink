@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShrinkLinkCQS", "ShrinkLink
 		{B843CB89-0D90-4C99-80FB-1178579A725E} = {B843CB89-0D90-4C99-80FB-1178579A725E}
 	EndProjectSection
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2E37CDE7-72A0-471F-B3E1-EF50670143CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{33E3A3B1-E92A-47A5-A296-F4CE532E74AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E3A3B1-E92A-47A5-A296-F4CE532E74AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E3A3B1-E92A-47A5-A296-F4CE532E74AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E37CDE7-72A0-471F-B3E1-EF50670143CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E37CDE7-72A0-471F-B3E1-EF50670143CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E37CDE7-72A0-471F-B3E1-EF50670143CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E37CDE7-72A0-471F-B3E1-EF50670143CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
