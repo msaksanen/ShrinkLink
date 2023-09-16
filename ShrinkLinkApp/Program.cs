@@ -21,10 +21,11 @@ namespace ShrinkLinkApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            string LogFilePath =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Log\mvc_data.log");
-            var path = builder.Configuration ["Serilog:LogFilePath"];
-            if (path!=null && path!=string.Empty)
-                LogFilePath = path;
+            //string LogFilePath =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Log\mvc_data.log");
+            string LogFilePath = Path.Combine(Directory.GetCurrentDirectory(), @"Log/mvc_data.log");
+            //var path = builder.Configuration ["Serilog:LogFilePath"];
+            //if (path!=null && path!=string.Empty)
+            //    LogFilePath = path;
 
             builder.Host.UseSerilog((ctx, lc) =>
               lc.WriteTo.File(

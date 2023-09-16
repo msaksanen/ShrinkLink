@@ -15,16 +15,23 @@ services:
   shrinklinkapp:
     container_name: ShrinkLinkAppContainer
     image: ${DOCKER_REGISTRY-}shrinklinkapp
+    environment:
+    #- ASPNETCORE_URLS=http://+:80
+    - ConnectionStrings__Default=Server=${DATABASE_CONTAINER_NAME};Database=${DATABASE_DB_NAME};Persist Security Info=True;User ID=${DATABASE_USER};Password=${DATABASE_PASSWORD};TrustServerCertificate=True;
+    #- ConnectionStrings__Default=Server=shrinksqlsrvcontainer;Database=ShrinkLinkDB;Persist Security Info=True;User ID=SA;Password=qwerty12345;TrustServerCertificate=True; 
     ports:
        - 8001:80 
     build:
       context: .
       dockerfile: ShrinkLinkApp/Dockerfile
+    volumes: 
+       - serilogvolume:/app/Log/
     depends_on:
       - shrinksqlsrvcontainer
 
 volumes:
   sqlsrvvolume:
+  serilogvolume:
 
 networks:
   shrinknet: 
